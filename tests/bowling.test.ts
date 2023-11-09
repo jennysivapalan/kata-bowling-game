@@ -65,7 +65,7 @@ describe("test spare possibilities", () => {
       },
     ];
 
-    expect(totalScore(frames)).toBe(33);
+    expect(calculateCurrentRunningTotal(frames)).toBe(33);
   });
 });
 
@@ -76,5 +76,25 @@ describe("test strike possibilities", () => {
     };
 
     expect(updateIfStrike(frame).isStrike).toBe(true);
+  });
+
+  it("it calculates current frame total with the spare in the previous frame", () => {
+    const frames: Frame[] = [
+      {
+        turn1: 5,
+        turn2: 3,
+        runningTotal: 8,
+      },
+      {
+        turn1: 10,
+        isStrike: true,
+      },
+      {
+        turn1: 6,
+        turn2: 3,
+      },
+    ];
+
+    expect(calculateCurrentRunningTotal(frames)).toBe(36);
   });
 });

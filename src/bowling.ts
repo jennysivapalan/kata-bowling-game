@@ -46,8 +46,16 @@ export function calculateCurrentRunningTotal(frames: Frame[]) {
   if (previousKnownRunningTotal) {
     const previousFrame = frames[frames.length - 2];
     if (previousFrame && previousFrame.isSpare) {
-      const firstTurnScore = 10 + currentFrame.turn1;
-      return firstTurnScore + currentFrameTotal + previousKnownRunningTotal;
+      return (
+        10 + currentFrame.turn1 + currentFrameTotal + previousKnownRunningTotal
+      );
+    } else if (previousFrame && previousFrame.isStrike) {
+      return (
+        10 +
+        2 * currentFrame.turn1 +
+        (currentFrame.turn2 ? 2 * currentFrame.turn2 : 0) +
+        previousKnownRunningTotal
+      );
     } else return currentFrameTotal + previousKnownRunningTotal;
   } else return currentFrameTotal;
 }
