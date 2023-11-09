@@ -2,6 +2,7 @@ import {
   totalScore,
   Frame,
   updateIfSpare,
+  updateIfStrike,
   calculateCurrentRunningTotal,
 } from "../src/bowling";
 
@@ -65,5 +66,15 @@ describe("test spare possibilities", () => {
     ];
 
     expect(totalScore(frames)).toBe(33);
+  });
+});
+
+describe("test strike possibilities", () => {
+  it("it calculate if a frame is a strike", () => {
+    const frame: Frame = {
+      turn1: 10,
+    };
+
+    expect(updateIfStrike(frame).isStrike).toBe(true);
   });
 });

@@ -1,8 +1,9 @@
 export type Frame = {
   turn1: number;
-  turn2: number;
+  turn2?: number;
   runningTotal?: number;
   isSpare?: boolean;
+  isStrike?: boolean;
 };
 
 export function totalScore(frames: Frame[]) {
@@ -11,7 +12,12 @@ export function totalScore(frames: Frame[]) {
 }
 
 export function updateIfSpare(frame: Frame) {
-  if (frame.turn1 + frame.turn2 === 10) frame.isSpare = true;
+  if (frame.turn2 && frame.turn1 + frame.turn2 === 10) frame.isSpare = true;
+  return frame;
+}
+
+export function updateIfStrike(frame: Frame) {
+  if (frame.turn1 === 10) frame.isStrike = true;
   return frame;
 }
 
@@ -29,7 +35,9 @@ function getLastFrameWithARunningTotal(frames: Frame[]) {
 
 export function calculateCurrentRunningTotal(frames: Frame[]) {
   const currentFrame = frames[frames.length - 1];
-  const currentFrameTotal = currentFrame.turn1 + currentFrame.turn2;
+  const currentFrameTotal = currentFrame.turn2
+    ? currentFrame.turn1 + currentFrame.turn2
+    : currentFrame.turn1;
   const previousKnownRunningTotal = getLastFrameWithARunningTotal(frames);
 
   if (currentFrameTotal > 10)
