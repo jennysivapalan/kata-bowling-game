@@ -16,4 +16,17 @@ describe("test total score  function", () => {
 
     expect(totalScore(frames)).toBe(16);
   });
+
+  it("it should error if the total or turn 1 and turn 2 add up to total greater than 10", () => {
+    const frames: Frame[] = [
+      {
+        turn1: 6,
+        turn2: 5,
+      },
+    ];
+
+    expect(() => {
+      totalScore(frames);
+    }).toThrow("The total of turn 1 and turn 2 cannot be greater than 10");
+  });
 });
