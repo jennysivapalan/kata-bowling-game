@@ -43,12 +43,21 @@ export function calculateCurrentRunningTotal(frames: Frame[]) {
   if (currentFrameTotal > 10)
     throw new Error("The total of turn 1 and turn 2 cannot be greater than 10");
 
-  if (previousKnownRunningTotal) {
+  if (haveAnotherGo(frames)) {
+    frames[9].isSpare = true;
+    return undefined;
+  } else if (previousKnownRunningTotal) {
     const previousFrame = frames[frames.length - 2];
     if (previousFrame && previousFrame.isSpare) {
-      return (
-        10 + currentFrame.turn1 + currentFrameTotal + previousKnownRunningTotal
-      );
+      if (frames.indexOf(previousFrame) === 9)
+        return 10 + currentFrameTotal + previousKnownRunningTotal;
+      else
+        return (
+          10 +
+          currentFrame.turn1 +
+          currentFrameTotal +
+          previousKnownRunningTotal
+        );
     } else if (previousFrame && previousFrame.isStrike) {
       return (
         10 +
@@ -58,4 +67,15 @@ export function calculateCurrentRunningTotal(frames: Frame[]) {
       );
     } else return currentFrameTotal + previousKnownRunningTotal;
   } else return currentFrameTotal;
+}
+
+export function setFrameRunningTotal(
+  frame: Frame,
+  currentRunningTotal: number
+) {
+  frame.runningTotal = currentRunningTotal;
+}
+
+export function haveAnotherGo(frames: Frame[]) {
+  return frames.length === 10 && frames[9].isSpare;
 }

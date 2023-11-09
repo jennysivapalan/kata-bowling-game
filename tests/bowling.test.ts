@@ -4,6 +4,8 @@ import {
   updateIfSpare,
   updateIfStrike,
   calculateCurrentRunningTotal,
+  haveAnotherGo,
+  setFrameRunningTotal,
 } from "../src/bowling";
 
 describe("test calculateCurrentRunningTotal function", () => {
@@ -66,6 +68,74 @@ describe("test spare possibilities", () => {
     ];
 
     expect(calculateCurrentRunningTotal(frames)).toBe(33);
+  });
+
+  it("add an extra frame score if the 10th frame is a spare", () => {
+    const frame: Frame = {
+      turn1: 5,
+      turn2: 3,
+    };
+    const frames: Frame[] = [];
+
+    for (let i = 0; i < 9; i++) {
+      frames.push(frame);
+
+      const runningTotal = calculateCurrentRunningTotal(frames);
+      if (runningTotal) setFrameRunningTotal(frame, runningTotal);
+    }
+
+    const frame10: Frame = {
+      turn1: 5,
+      turn2: 5,
+      isSpare: true,
+    };
+    frames.push(frame10);
+    const runningTotal = calculateCurrentRunningTotal(frames);
+    if (runningTotal) setFrameRunningTotal(frame, runningTotal);
+    expect(haveAnotherGo(frames)).toBe(true);
+
+    frames.push(frame);
+    expect(calculateCurrentRunningTotal(frames)).toBe(90);
+  });
+});
+describe("test haveAnotherGo function", () => {
+  it("add an extra frame score if the 10th frame is a spare", () => {
+    const frame: Frame = {
+      turn1: 5,
+      turn2: 3,
+    };
+    const frames = new Array<Frame>(9);
+    frames.fill(frame, 0, 9);
+
+    const frame10: Frame = {
+      turn1: 5,
+      turn2: 5,
+      isSpare: true,
+    };
+    frames.push(frame10);
+
+    expect(haveAnotherGo(frames)).toBe(true);
+  });
+  it("add no have an extra frame if number of frames is not 10", () => {
+    const frame: Frame = {
+      turn1: 5,
+      turn2: 3,
+    };
+    const frames: Frame[] = Array().fill(frame, 0, 7);
+    frame.isSpare = true;
+    frames.push(frame);
+
+    expect(haveAnotherGo(frames)).toBe(false);
+  });
+
+  it("add no have an extra frame if frame 10 is not a spare", () => {
+    const frame: Frame = {
+      turn1: 5,
+      turn2: 3,
+    };
+    const frames: Frame[] = Array().fill(frame, 0, 9);
+
+    expect(haveAnotherGo(frames)).toBe(false);
   });
 });
 
