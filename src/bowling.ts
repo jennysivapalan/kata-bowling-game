@@ -1,4 +1,9 @@
-export type Frame = { turn1: number; turn2: number; runningTotal?: number };
+export type Frame = {
+  turn1: number;
+  turn2: number;
+  runningTotal?: number;
+  isSpare?: boolean;
+};
 
 export function totalScore(frames: Frame[]) {
   const lastFrame = frames[frames.length - 1];
@@ -8,4 +13,8 @@ export function totalScore(frames: Frame[]) {
   const previousRunningTotal = frames[frames.length - 2].runningTotal;
   if (previousRunningTotal) return previousRunningTotal + lastRunningTotal;
   else return lastRunningTotal;
+}
+
+export function checkIfSpare(frame: Frame) {
+  return frame.turn1 + frame.turn2 === 10;
 }
