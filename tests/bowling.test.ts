@@ -5,7 +5,7 @@ import {
   calculateCurrentRunningTotal,
 } from "../src/bowling";
 
-describe("test total score  function", () => {
+describe("test calculateCurrentRunningTotal function", () => {
   it("it should add the total score for a set of 2 frames at bowling", () => {
     const frames: Frame[] = [
       {
@@ -19,7 +19,7 @@ describe("test total score  function", () => {
       },
     ];
 
-    expect(totalScore(frames)).toBe(16);
+    expect(calculateCurrentRunningTotal(frames)).toBe(16);
   });
 
   it("it should error if the total or turn 1 and turn 2 add up to total greater than 10", () => {
