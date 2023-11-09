@@ -93,8 +93,11 @@ describe("test spare possibilities", () => {
     if (runningTotal) setFrameRunningTotal(frame, runningTotal);
     expect(haveAnotherGo(frames)).toBe(true);
 
-    frames.push(frame);
-    expect(calculateCurrentRunningTotal(frames)).toBe(90);
+    const frame11: Frame = {
+      turn1: 5,
+    };
+    frames.push(frame11);
+    expect(calculateCurrentRunningTotal(frames)).toBe(87);
   });
 });
 describe("test haveAnotherGo function", () => {
