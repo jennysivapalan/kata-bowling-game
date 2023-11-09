@@ -1,4 +1,9 @@
-import { totalScore, Frame, checkIfSpare } from "../src/bowling";
+import {
+  totalScore,
+  Frame,
+  updateIfSpare,
+  calculateCurrentRunningTotal,
+} from "../src/bowling";
 
 describe("test total score  function", () => {
   it("it should add the total score for a set of 2 frames at bowling", () => {
@@ -26,7 +31,7 @@ describe("test total score  function", () => {
     ];
 
     expect(() => {
-      totalScore(frames);
+      calculateCurrentRunningTotal(frames);
     }).toThrow("The total of turn 1 and turn 2 cannot be greater than 10");
   });
 });
@@ -36,9 +41,29 @@ describe("test spare possibilities", () => {
     const frame: Frame = {
       turn1: 5,
       turn2: 5,
-      runningTotal: 10,
     };
 
-    expect(checkIfSpare(frame)).toBe(true);
+    expect(updateIfSpare(frame).isSpare).toBe(true);
+  });
+
+  it("it calculates current frame total with the spare in the previous frame", () => {
+    const frames: Frame[] = [
+      {
+        turn1: 5,
+        turn2: 3,
+        runningTotal: 8,
+      },
+      {
+        turn1: 5,
+        turn2: 5,
+        isSpare: true,
+      },
+      {
+        turn1: 6,
+        turn2: 3,
+      },
+    ];
+
+    expect(totalScore(frames)).toBe(33);
   });
 });
