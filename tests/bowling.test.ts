@@ -1,5 +1,4 @@
 import {
-  totalScore,
   Frame,
   updateIfSpare,
   updateIfStrike,
