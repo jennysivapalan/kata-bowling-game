@@ -151,7 +151,7 @@ describe("test haveAnotherGo function", () => {
 
     expect(haveAnotherGo(frames)).toBe(true);
   });
-  it("no extra frame if number of frames is not 10", () => {
+  it("no extra frame if number of frames is not 10 and last frame is a spare", () => {
     const frame: Frame = {
       turn1: 5,
       turn2: 3,
@@ -188,6 +188,28 @@ describe("test haveAnotherGo function", () => {
     frames.push(frame10);
 
     expect(haveAnotherGo(frames)).toBe(true);
+  });
+
+  it("no extra frame if number of frames is not 10 and last frame is a strike", () => {
+    const frame: Frame = {
+      turn1: 5,
+      turn2: 3,
+    };
+    const frames: Frame[] = Array().fill(frame, 0, 5);
+    frame.isStrike = true;
+    frames.push(frame);
+
+    expect(haveAnotherGo(frames)).toBe(false);
+  });
+
+  it("no extra frame if frame 10 is not a strike", () => {
+    const frame: Frame = {
+      turn1: 5,
+      turn2: 3,
+    };
+    const frames: Frame[] = Array().fill(frame, 0, 9);
+
+    expect(haveAnotherGo(frames)).toBe(false);
   });
 });
 
