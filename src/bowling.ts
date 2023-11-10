@@ -37,15 +37,17 @@ export function calculateCurrentRunningTotal(frames: Frame[]) {
 
   if (currentFrameTotal > 10)
     throw new Error("The total of turn 1 and turn 2 cannot be greater than 10");
-  if (frames.length === 11 && frames[10].turn2 && frames[9].isSpare)
+  if (frames.length === 11 && frames[9].isSpare && frames[10].turn2)
     throw new Error("11th frame for a spare can only have 1 go");
 
   if (haveAnotherGo(frames)) {
-    frames[9].isSpare = true;
+    frames[9].turn1 === 10
+      ? (frames[9].isStrike = true)
+      : (frames[9].isSpare = true);
     return undefined;
   } else if (previousKnownRunningTotal) {
     const previousFrame = frames[frames.length - 2];
-    if (previousFrame && previousFrame.isSpare) {
+    if (previousFrame && (previousFrame.isSpare || previousFrame.isStrike)) {
       if (frames.indexOf(previousFrame) === 9)
         return 10 + currentFrameTotal + previousKnownRunningTotal;
       else
