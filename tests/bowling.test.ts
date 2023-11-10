@@ -172,6 +172,23 @@ describe("test haveAnotherGo function", () => {
 
     expect(haveAnotherGo(frames)).toBe(false);
   });
+
+  it("add an extra frame score if the 10th frame is a strike", () => {
+    const frame: Frame = {
+      turn1: 5,
+      turn2: 3,
+    };
+    const frames = new Array<Frame>(9);
+    frames.fill(frame, 0, 9);
+
+    const frame10: Frame = {
+      turn1: 10,
+      isStrike: true,
+    };
+    frames.push(frame10);
+
+    expect(haveAnotherGo(frames)).toBe(true);
+  });
 });
 
 describe("test strike possibilities", () => {

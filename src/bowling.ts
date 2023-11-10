@@ -74,5 +74,5 @@ export function setFrameRunningTotal(
 }
 
 export function haveAnotherGo(frames: Frame[]) {
-  return frames.length === 10 && frames[9].isSpare;
+  return frames.length === 10 && (frames[9].isSpare || frames[9].isStrike);
 }
