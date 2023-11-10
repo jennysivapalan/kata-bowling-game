@@ -151,7 +151,7 @@ describe("test haveAnotherGo function", () => {
 
     expect(haveAnotherGo(frames)).toBe(true);
   });
-  it("add no have an extra frame if number of frames is not 10", () => {
+  it("no extra frame if number of frames is not 10", () => {
     const frame: Frame = {
       turn1: 5,
       turn2: 3,
@@ -163,7 +163,7 @@ describe("test haveAnotherGo function", () => {
     expect(haveAnotherGo(frames)).toBe(false);
   });
 
-  it("add no have an extra frame if frame 10 is not a spare", () => {
+  it("no extra frame if frame 10 is not a spare", () => {
     const frame: Frame = {
       turn1: 5,
       turn2: 3,
