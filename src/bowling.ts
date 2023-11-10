@@ -37,6 +37,8 @@ export function calculateCurrentRunningTotal(frames: Frame[]) {
 
   if (currentFrameTotal > 10)
     throw new Error("The total of turn 1 and turn 2 cannot be greater than 10");
+  if (frames.length === 11 && frames[10].turn2 && frames[9].isSpare)
+    throw new Error("11th frame for a spare can only have 1 go");
 
   if (haveAnotherGo(frames)) {
     frames[9].isSpare = true;

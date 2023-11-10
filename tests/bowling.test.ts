@@ -99,6 +99,39 @@ describe("test spare possibilities", () => {
     frames.push(frame11);
     expect(calculateCurrentRunningTotal(frames)).toBe(87);
   });
+
+  it("will throw an error if 11th frame is two gos", () => {
+    const frame: Frame = {
+      turn1: 5,
+      turn2: 3,
+    };
+    const frames: Frame[] = [];
+
+    for (let i = 0; i < 9; i++) {
+      frames.push(frame);
+
+      const runningTotal = calculateCurrentRunningTotal(frames);
+      if (runningTotal) setFrameRunningTotal(frame, runningTotal);
+    }
+
+    const frame10: Frame = {
+      turn1: 5,
+      turn2: 5,
+      isSpare: true,
+    };
+    frames.push(frame10);
+    const runningTotal = calculateCurrentRunningTotal(frames);
+    if (runningTotal) setFrameRunningTotal(frame, runningTotal);
+
+    const frame11: Frame = {
+      turn1: 5,
+      turn2: 3,
+    };
+    frames.push(frame11);
+    expect(() => {
+      calculateCurrentRunningTotal(frames);
+    }).toThrow("11th frame for a spare can only have 1 go");
+  });
 });
 describe("test haveAnotherGo function", () => {
   it("add an extra frame score if the 10th frame is a spare", () => {
