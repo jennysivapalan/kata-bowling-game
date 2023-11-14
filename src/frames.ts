@@ -4,11 +4,7 @@ export function createFrames(framesString: string) {
     if (frame === "X") return getStrikeFrame();
     else if (framesAsArray.indexOf(frame) === 10)
       return getEleventhFrame(frame);
-    else if (frame.includes("-")) {
-      return getScoreForFrameWithMiss(frame);
-    } else {
-      return getScoreForFrameTwoTurns(frame);
-    }
+    else return getScoreForFrame(frame);
   });
 }
 
@@ -22,12 +18,12 @@ function getEleventhFrame(frame: string) {
   } else return { turn1: Number(frame), isSpare: false, isStrike: false };
 }
 
-function getScoreForFrameTwoTurns(frame: string) {
-  const turns = frame.split("/");
-  const turn1 = Number(turns[0]);
-  const turn2 = turns[1] === "" ? 10 - turn1 : Number(turns[1]);
-  const isSpare = turn1 + turn2 === 10;
-  return { turn1: turn1, turn2: turn2, isSpare: isSpare, isStrike: false };
+function getScoreForFrame(frame: string) {
+  if (frame.includes("-")) {
+    return getScoreForFrameWithMiss(frame);
+  } else {
+    return getScoreForFrameTwoTurns(frame);
+  }
 }
 
 function getScoreForFrameWithMiss(frame: string) {
@@ -39,4 +35,12 @@ function getScoreForFrameWithMiss(frame: string) {
     isSpare: false,
     isStrike: false,
   };
+}
+
+function getScoreForFrameTwoTurns(frame: string) {
+  const turns = frame.split("/");
+  const turn1 = Number(turns[0]);
+  const turn2 = turns[1] === "" ? 10 - turn1 : Number(turns[1]);
+  const isSpare = turn1 + turn2 === 10;
+  return { turn1: turn1, turn2: turn2, isSpare: isSpare, isStrike: false };
 }
