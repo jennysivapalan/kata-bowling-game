@@ -2,7 +2,7 @@ export type Frame = {
   turn1: number;
   turn2?: number;
   runningTotal?: number;
-  isSpare?: boolean;
+  isSpare: boolean;
   isStrike?: boolean;
 };
 
