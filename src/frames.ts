@@ -3,6 +3,8 @@ export function createFrames(framesString: string) {
   return framesAsArray.map((frame) => {
     if (frame === "X")
       return { turn1: Number(10), isSpare: false, isStrike: true };
+    else if (framesAsArray.indexOf(frame) === 10)
+      return { turn1: Number(frame), isSpare: false, isStrike: false };
     else if (frame.includes("-")) {
       const turns = frame.split("-");
       const turnsAsNum = turns.map((t) => (t === "" ? 0 : Number(t)));
