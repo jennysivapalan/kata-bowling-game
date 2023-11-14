@@ -7,10 +7,22 @@ export type Frame = {
 };
 
 export function totalScore(frames: Frame[]) {
-  return frames.reduce(
-    (acc, frame) => acc + frame.turn1 + (frame.turn2 ? frame.turn2 : 0),
-    0
-  );
+  return frames.reduce((acc, frame) => acc + getFrameScore(frame, frames), 0);
+}
+
+function getFrameScore(frame: Frame, frames: Frame[]) {
+  const frameIndex = frames.indexOf(frame);
+  return frame.isSpare
+    ? getFrameScoreIfSpare(frames[frameIndex + 1])
+    : frame.turn1 + getTurnTwo(frame);
+}
+
+function getFrameScoreIfSpare(nextFrame: Frame) {
+  return 10 + nextFrame.turn1;
+}
+
+function getTurnTwo(frame: Frame) {
+  return frame.turn2 ? frame.turn2 : 0;
 }
 
 export function updateIfSpare(frame: Frame) {
