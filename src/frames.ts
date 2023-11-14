@@ -13,8 +13,8 @@ function getStrikeFrame() {
 }
 
 function getEleventhFrame(frame: string) {
-  if (frame.includes("/")) {
-    return getScoreForFrameTwoTurns(frame);
+  if (frame.includes("/") || frame.includes("-")) {
+    return getScoreForFrame(frame);
   } else return { turn1: Number(frame), isSpare: false, isStrike: false };
 }
 
