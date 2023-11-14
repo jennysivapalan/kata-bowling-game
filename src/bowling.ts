@@ -6,6 +6,13 @@ export type Frame = {
   isStrike?: boolean;
 };
 
+export function totalScore(frames: Frame[]) {
+  return frames.reduce(
+    (acc, frame) => acc + frame.turn1 + (frame.turn2 ? frame.turn2 : 0),
+    0
+  );
+}
+
 export function updateIfSpare(frame: Frame) {
   if (frame.turn2 && frame.turn1 + frame.turn2 === 10) frame.isSpare = true;
   return frame;
