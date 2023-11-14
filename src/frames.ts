@@ -1,15 +1,21 @@
 export function createFrames(framesString: string) {
   const framesAsArray = framesString.split(" ");
   return framesAsArray.map((frame) => {
-    if (frame === "X") return getStrikeFrame();
-    else if (framesAsArray.indexOf(frame) === 10)
+    if (frame === "X") return getStrikeFrame(frame);
+    else if (framesAsArray.indexOf(frame) === 11) {
+      return getTwelthFrame(frame);
+    } else if (framesAsArray.indexOf(frame) === 10)
       return getEleventhFrame(frame);
     else return getScoreForFrame(frame);
   });
 }
 
-function getStrikeFrame() {
+function getStrikeFrame(frame: string) {
   return { turn1: Number(10), isSpare: false, isStrike: true };
+}
+
+function getTwelthFrame(frame: string) {
+  return { turn1: Number(frame), isSpare: false, isStrike: false };
 }
 
 function getEleventhFrame(frame: string) {
