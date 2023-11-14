@@ -132,6 +132,29 @@ describe("test spare possibilities", () => {
       calculateCurrentRunningTotal(frames);
     }).toThrow("11th frame for a spare can only have 1 go");
   });
+
+  it("can calculate total score for a frame when there are multiple spares in a row", () => {
+    const frames: Frame[] = [
+      {
+        turn1: 5,
+        turn2: 3,
+        runningTotal: 8,
+      },
+      {
+        turn1: 5,
+        turn2: 5,
+        isSpare: true,
+      },
+      {
+        turn1: 7,
+      },
+    ];
+
+    //should this mapped out differently?
+    //update frame 2 once frame 3 has first turn?
+    //then run calculate current running total after frame 3 finished
+    expect(calculateCurrentRunningTotal(frames)).toBe(39);
+  });
 });
 describe("test haveAnotherGo function", () => {
   it("add an extra frame score if the 10th frame is a spare", () => {
