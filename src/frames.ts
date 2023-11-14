@@ -13,9 +13,11 @@ function getStrikeFrame() {
 }
 
 function getEleventhFrame(frame: string) {
-  if (frame.includes("/") || frame.includes("-")) {
-    return getScoreForFrame(frame);
-  } else return { turn1: Number(frame), isSpare: false, isStrike: false };
+  if (frame.length === 1) {
+    if (frame === "-")
+      return { turn1: Number(0), isSpare: false, isStrike: false };
+    else return { turn1: Number(frame), isSpare: false, isStrike: false };
+  } else return getScoreForFrame(frame);
 }
 
 function getScoreForFrame(frame: string) {
