@@ -3,7 +3,7 @@ export type Frame = {
   turn2?: number;
   runningTotal?: number;
   isSpare: boolean;
-  isStrike?: boolean;
+  isStrike: boolean;
 };
 
 export function totalScore(frames: Frame[]) {
@@ -12,9 +12,16 @@ export function totalScore(frames: Frame[]) {
 
 function getFrameScore(frame: Frame, frames: Frame[]) {
   const frameIndex = frames.indexOf(frame);
-  return frame.isSpare
-    ? getFrameScoreIfSpare(frames[frameIndex + 1])
-    : frame.turn1 + getTurnTwo(frame);
+  if (frame.isStrike) return getFrameScoreIfStrike(frames[frameIndex + 1]);
+  else {
+    return frame.isSpare
+      ? getFrameScoreIfSpare(frames[frameIndex + 1])
+      : frame.turn1 + getTurnTwo(frame);
+  }
+}
+
+function getFrameScoreIfStrike(nextFrame: Frame) {
+  return 10 + nextFrame.turn1 + getTurnTwo(nextFrame);
 }
 
 function getFrameScoreIfSpare(nextFrame: Frame) {

@@ -15,11 +15,13 @@ describe("test calculateCurrentRunningTotal function", () => {
         turn2: 5,
         isSpare: false,
         runningTotal: 9,
+        isStrike: false,
       },
       {
         turn1: 3,
         turn2: 4,
         isSpare: false,
+        isStrike: false,
       },
     ];
 
@@ -32,6 +34,7 @@ describe("test calculateCurrentRunningTotal function", () => {
         turn1: 6,
         turn2: 5,
         isSpare: false,
+        isStrike: false,
       },
     ];
 
@@ -47,6 +50,7 @@ describe("test spare possibilities", () => {
       turn1: 5,
       turn2: 5,
       isSpare: true,
+      isStrike: false,
     };
 
     expect(updateIfSpare(frame).isSpare).toBe(true);
@@ -59,16 +63,19 @@ describe("test spare possibilities", () => {
         turn2: 3,
         runningTotal: 8,
         isSpare: false,
+        isStrike: false,
       },
       {
         turn1: 5,
         turn2: 5,
         isSpare: true,
+        isStrike: false,
       },
       {
         turn1: 6,
         turn2: 3,
         isSpare: false,
+        isStrike: false,
       },
     ];
 
@@ -80,6 +87,7 @@ describe("test spare possibilities", () => {
       turn1: 5,
       turn2: 3,
       isSpare: false,
+      isStrike: false,
     };
     const frames: Frame[] = [];
 
@@ -94,6 +102,7 @@ describe("test spare possibilities", () => {
       turn1: 5,
       turn2: 5,
       isSpare: true,
+      isStrike: false,
     };
     frames.push(frame10);
     const runningTotal = calculateCurrentRunningTotal(frames);
@@ -103,6 +112,7 @@ describe("test spare possibilities", () => {
     const frame11: Frame = {
       turn1: 5,
       isSpare: false,
+      isStrike: false,
     };
     frames.push(frame11);
     expect(calculateCurrentRunningTotal(frames)).toBe(87);
@@ -113,6 +123,7 @@ describe("test spare possibilities", () => {
       turn1: 5,
       turn2: 3,
       isSpare: false,
+      isStrike: false,
     };
     const frames: Frame[] = [];
 
@@ -127,6 +138,7 @@ describe("test spare possibilities", () => {
       turn1: 5,
       turn2: 5,
       isSpare: true,
+      isStrike: false,
     };
     frames.push(frame10);
     const runningTotal = calculateCurrentRunningTotal(frames);
@@ -136,6 +148,7 @@ describe("test spare possibilities", () => {
       turn1: 5,
       turn2: 3,
       isSpare: false,
+      isStrike: false,
     };
     frames.push(frame11);
     expect(() => {
@@ -149,6 +162,7 @@ describe("test haveAnotherGo function", () => {
       turn1: 5,
       turn2: 3,
       isSpare: false,
+      isStrike: false,
     };
     const frames = new Array<Frame>(9);
     frames.fill(frame, 0, 9);
@@ -157,6 +171,7 @@ describe("test haveAnotherGo function", () => {
       turn1: 5,
       turn2: 5,
       isSpare: true,
+      isStrike: false,
     };
     frames.push(frame10);
 
@@ -167,6 +182,7 @@ describe("test haveAnotherGo function", () => {
       turn1: 5,
       turn2: 3,
       isSpare: false,
+      isStrike: false,
     };
     const frames: Frame[] = Array().fill(frame, 0, 7);
     frame.isSpare = true;
@@ -180,6 +196,7 @@ describe("test haveAnotherGo function", () => {
       turn1: 5,
       turn2: 3,
       isSpare: false,
+      isStrike: false,
     };
     const frames: Frame[] = Array().fill(frame, 0, 9);
 
@@ -191,6 +208,7 @@ describe("test haveAnotherGo function", () => {
       turn1: 5,
       turn2: 3,
       isSpare: false,
+      isStrike: false,
     };
     const frames = new Array<Frame>(9);
     frames.fill(frame, 0, 9);
@@ -210,6 +228,7 @@ describe("test haveAnotherGo function", () => {
       turn1: 5,
       turn2: 3,
       isSpare: false,
+      isStrike: false,
     };
     const frames: Frame[] = Array().fill(frame, 0, 5);
     frame.isStrike = true;
@@ -223,6 +242,7 @@ describe("test haveAnotherGo function", () => {
       turn1: 5,
       turn2: 3,
       isSpare: false,
+      isStrike: false,
     };
     const frames: Frame[] = Array().fill(frame, 0, 9);
 
@@ -235,6 +255,7 @@ describe("test strike possibilities", () => {
     const frame: Frame = {
       turn1: 10,
       isSpare: false,
+      isStrike: false,
     };
 
     expect(updateIfStrike(frame).isStrike).toBe(true);
@@ -247,6 +268,7 @@ describe("test strike possibilities", () => {
         turn2: 3,
         runningTotal: 8,
         isSpare: false,
+        isStrike: false,
       },
       {
         turn1: 10,
@@ -257,6 +279,7 @@ describe("test strike possibilities", () => {
         turn1: 6,
         turn2: 3,
         isSpare: false,
+        isStrike: false,
       },
     ];
 
@@ -268,6 +291,7 @@ describe("test strike possibilities", () => {
       turn1: 5,
       turn2: 3,
       isSpare: false,
+      isStrike: false,
     };
     const frames: Frame[] = [];
 
@@ -292,6 +316,7 @@ describe("test strike possibilities", () => {
       turn1: 4,
       turn2: 3,
       isSpare: false,
+      isStrike: false,
     };
     frames.push(frame11);
     expect(calculateCurrentRunningTotal(frames)).toBe(89);
