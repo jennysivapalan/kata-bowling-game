@@ -11,13 +11,15 @@ export function totalScore(frames: Frame[]) {
 }
 
 function getFrameScore(frame: Frame, frames: Frame[]) {
-  const frameIndex = frames.indexOf(frame);
-  if (frame.isStrike) return getFrameScoreIfStrike(frames[frameIndex + 1]);
-  else {
-    return frame.isSpare
-      ? getFrameScoreIfSpare(frames[frameIndex + 1])
-      : frame.turn1 + getTurnTwo(frame);
-  }
+  if (frames.indexOf(frame) < 10) {
+    const frameIndex = frames.indexOf(frame);
+    if (frame.isStrike) return getFrameScoreIfStrike(frames[frameIndex + 1]);
+    else {
+      return frame.isSpare
+        ? getFrameScoreIfSpare(frames[frameIndex + 1])
+        : frame.turn1 + getTurnTwo(frame);
+    }
+  } else return 0;
 }
 
 function getFrameScoreIfStrike(nextFrame: Frame) {
