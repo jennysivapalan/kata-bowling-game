@@ -1,9 +1,4 @@
-export type Frame = {
-  turn1: number;
-  turn2?: number;
-  isSpare: boolean;
-  isStrike: boolean;
-};
+import { Frame } from "./frame.types";
 
 export function totalScore(frames: Frame[]) {
   return frames.reduce((acc, frame) => acc + getFrameScore(frame, frames), 0);

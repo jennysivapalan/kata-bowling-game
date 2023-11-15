@@ -1,4 +1,5 @@
-import { Frame, totalScore } from "../src/bowling";
+import { Frame } from "../src/frame.types";
+import { totalScore } from "../src/bowling-total-score";
 
 describe("test totalScore function using 10 frames", () => {
   it("it calculate the total score for 10 frames with no spares or strikes", () => {
