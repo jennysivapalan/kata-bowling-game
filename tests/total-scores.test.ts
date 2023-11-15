@@ -412,3 +412,76 @@ describe("test totalScore function using 11 frames when 10th frame is a spare", 
     expect(totalScore(frames)).toBe(114);
   });
 });
+
+describe("test total score function where 10th frame is a strike", () => {
+  it("it should calculate a set of 11 frames with last frame being 2 turn for scoring strike in 10th frame", () => {
+    const frames: Frame[] = [
+      {
+        turn1: 5,
+        turn2: 3,
+        isSpare: false,
+        isStrike: false,
+      },
+      {
+        turn1: 0,
+        turn2: 0,
+        isSpare: false,
+        isStrike: false,
+      },
+      {
+        turn1: 5,
+        turn2: 5,
+        isSpare: true,
+        isStrike: false,
+      },
+      {
+        turn1: 10,
+        isSpare: false,
+        isStrike: true,
+      },
+      {
+        turn1: 3,
+        turn2: 7,
+        isSpare: true,
+        isStrike: false,
+      },
+      {
+        turn1: 3,
+        turn2: 7,
+        isSpare: true,
+        isStrike: false,
+      },
+      {
+        turn1: 5,
+        turn2: 2,
+        isSpare: false,
+        isStrike: false,
+      },
+      {
+        turn1: 2,
+        turn2: 0,
+        isSpare: false,
+        isStrike: false,
+      },
+      {
+        turn1: 5,
+        turn2: 4,
+        isSpare: false,
+        isStrike: false,
+      },
+      {
+        turn1: 10,
+        isSpare: false,
+        isStrike: true,
+      },
+      {
+        turn1: 3,
+        turn2: 6,
+        isSpare: false,
+        isStrike: false,
+      },
+    ];
+
+    expect(totalScore(frames)).toEqual(113);
+  });
+});
