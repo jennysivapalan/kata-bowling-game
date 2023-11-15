@@ -9,19 +9,23 @@ function getFrameScore(frame: Frame, frames: Frame[]) {
 
   if (frames.length === 12 && indexOfFrame == 11 && frames[11] === frame) {
     return frames[11].turn1;
-  } else if (frames.indexOf(frame) < 10) {
-    const frameIndex = frames.indexOf(frame);
-    if (frame.isStrike) return getFrameScoreIfStrike(frames[frameIndex + 1]);
+  } else if (indexOfFrame < 10) {
+    if (frame.isStrike) return getFrameScoreIfStrike(frames, indexOfFrame + 1);
     else {
       return frame.isSpare
-        ? getFrameScoreIfSpare(frames[frameIndex + 1])
+        ? getFrameScoreIfSpare(frames[indexOfFrame + 1])
         : frame.turn1 + getTurnTwo(frame);
     }
   } else return 0;
 }
 
-function getFrameScoreIfStrike(nextFrame: Frame) {
-  return 10 + nextFrame.turn1 + getTurnTwo(nextFrame);
+function getFrameScoreIfStrike(frames: Frame[], nextFrameIndex: number) {
+  if (frames[nextFrameIndex].turn1 === 10 && nextFrameIndex < 10) {
+    return 10 + 10 + frames[nextFrameIndex + 1].turn1;
+  } else
+    return (
+      10 + frames[nextFrameIndex].turn1 + getTurnTwo(frames[nextFrameIndex])
+    );
 }
 
 function getFrameScoreIfSpare(nextFrame: Frame) {

@@ -11,4 +11,8 @@ describe("test calculating the total score for a string of frames", () => {
   it("21 rolls: 10 pairs of 5 and spare, with a final 5)", () => {
     expect(calculateTotalScore("5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5")).toBe(150);
   });
+
+  it("12 rolls: 12 strikes = 10 frames * 30 points = 300", () => {
+    expect(calculateTotalScore("X X X X X X X X X X X X")).toBe(300);
+  });
 });
