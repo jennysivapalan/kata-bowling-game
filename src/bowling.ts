@@ -11,7 +11,11 @@ export function totalScore(frames: Frame[]) {
 }
 
 function getFrameScore(frame: Frame, frames: Frame[]) {
-  if (frames.indexOf(frame) < 10) {
+  const indexOfFrame = frames.indexOf(frame);
+
+  if (frames.length === 12 && indexOfFrame == 11 && frames[11] === frame) {
+    return frames[11].turn1;
+  } else if (frames.indexOf(frame) < 10) {
     const frameIndex = frames.indexOf(frame);
     if (frame.isStrike) return getFrameScoreIfStrike(frames[frameIndex + 1]);
     else {
