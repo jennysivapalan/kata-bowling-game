@@ -1,6 +1,6 @@
 import { Frame, totalScore } from "../src/bowling";
 
-describe("test totalScore function", () => {
+describe("test totalScore function using 10 frames", () => {
   it("it calculate the total score for 10 frames with no spares or strikes", () => {
     const frames: Frame[] = [
       {
@@ -197,7 +197,9 @@ describe("test totalScore function", () => {
     ];
     expect(totalScore(frames)).toBe(66);
   });
+});
 
+describe("test totalScore function using 11 frames when 10th frame is a spare", () => {
   it("it calculate the total score for 11 frames with 10th frame being a spare", () => {
     const frames: Frame[] = [
       {
