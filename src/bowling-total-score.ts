@@ -35,8 +35,3 @@ function getFrameScoreIfSpare(nextFrame: Frame) {
 function getTurnTwo(frame: Frame) {
   return frame.turn2 ? frame.turn2 : 0;
 }
-
-export function updateIfSpare(frame: Frame) {
-  if (frame.turn2 && frame.turn1 + frame.turn2 === 10) frame.isSpare = true;
-  return frame;
-}
