@@ -1,6 +1,6 @@
 import { Frame } from "../src/bowling";
 import { createFrames } from "../src/frames";
-describe("test createFrames function", () => {
+describe("test createFrames function using 10 frames", () => {
   it("it should create a set of 10 frames", () => {
     const framesAsString = "5/3 -- 5/ X 3/ 3/ 5/2 2- 5/4 -2";
 
@@ -68,7 +68,9 @@ describe("test createFrames function", () => {
 
     expect(createFrames(framesAsString)).toEqual(expectedFrames);
   });
+});
 
+describe("test createFrames function when 10th frame is a spare", () => {
   it("it should create a set of 11 frames with last frame being 1 turn for scoring spare in 10th frame", () => {
     const framesAsString = "5/3 -- 5/ X 3/ 3/ 5/2 2- 5/4 2/ 6";
 
@@ -287,7 +289,8 @@ describe("test createFrames function", () => {
 
     expect(createFrames(framesAsString)).toEqual(expectedFrames);
   });
-
+});
+describe("test createFrames function where 10th frame is a strike", () => {
   it("it should create a set of 11 frames with last frame being 2 turn for scoring strike in 10th frame", () => {
     const framesAsString = "5/3 -- 5/ X 3/ 3/ 5/2 2- 5/4 X 3/6";
 
