@@ -19,19 +19,17 @@ function getTwelthFrame(frame: string) {
 }
 
 function getEleventhFrame(frame: string) {
-  if (frame.length === 1) {
-    if (frame === "-")
-      return { turn1: Number(0), isSpare: false, isStrike: false };
-    else return { turn1: Number(frame), isSpare: false, isStrike: false };
-  } else return getScoreForFrame(frame);
+  return frame.length === 1
+    ? frame === "-"
+      ? { turn1: Number(0), isSpare: false, isStrike: false }
+      : { turn1: Number(frame), isSpare: false, isStrike: false }
+    : getScoreForFrame(frame);
 }
 
 function getScoreForFrame(frame: string) {
-  if (frame.includes("-")) {
-    return getScoreForFrameWithMiss(frame);
-  } else {
-    return getScoreForFrameTwoTurns(frame);
-  }
+  return frame.includes("-")
+    ? getScoreForFrameWithMiss(frame)
+    : getScoreForFrameTwoTurns(frame);
 }
 
 function getScoreForFrameWithMiss(frame: string) {
