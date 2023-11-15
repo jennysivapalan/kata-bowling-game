@@ -1,5 +1,4 @@
 import { Frame } from "../src/frame.types";
-
 import { createFrames } from "../src/frames";
 describe("test createFrames function using 10 frames", () => {
   it("it should create a set of 10 frames", () => {
